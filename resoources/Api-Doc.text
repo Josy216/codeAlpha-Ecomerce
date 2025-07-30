@@ -1,0 +1,31 @@
+
+
+## 🌐 API Endpoints Sample
+
+### 🧍 USERS
+
+* `POST /api/users/register` – Register new user
+* `POST /api/users/login` – Login user
+* `GET /api/users/me` – Get current user info
+
+### 📦 PRODUCTS
+
+* `GET /api/products` – Get all products
+* `POST /api/products` – Add product (admin)
+* `GET /api/products/:id` – Get single product
+* `PUT /api/products/:id` – Update product
+* `DELETE /api/products/:id` – Delete product
+
+### 🛒 CART
+
+* `GET /api/cart` – Get current user’s cart
+* `POST /api/cart/add` – Add item to cart
+* `POST /api/cart/remove` – Remove item from cart
+* `POST /api/cart/clear` – Clear cart
+
+### 📦 ORDERS
+
+* `POST /api/orders` – Place order
+* `GET /api/orders` – List user orders
+* `GET /api/orders/:id` – Order details
+

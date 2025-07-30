@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Commerce Backend Documentation</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; background-color: #f9f9f9; }
+    h1, h2, h3 { color: #2c3e50; }
+    code { background: #eee; padding: 2px 4px; border-radius: 4px; }
+    .section { margin-bottom: 40px; }
+    ul { margin-left: 20px; }
+    pre { background: #f4f4f4; padding: 10px; border-left: 4px solid #007BFF; overflow-x: auto; }
+  </style>
+</head>
+<body>
+
+  <h1>🛍️ E-Commerce Backend Documentation</h1>
+
+  <div class="section">
+    <h2>🗃️ Data Models</h2>
+
+    <h3>1. User</h3>
+    <pre>
+{
+  id: String,
+  name: String,
+  email: String,
+  password: String (hashed),
+  role: "user" | "admin",
+  createdAt: Date
+}
+    </pre>
+
+    <h3>2. Product</h3>
+    <pre>
+{
+  id: String,
+  name: String,
+  description: String,
+  price: Number,
+  image: String,
+  stock: Number,
+  category: String,
+  createdAt: Date
+}
+    </pre>
+
+    <h3>3. CartItem (session-based or DB)</h3>
+    <pre>
+{
+  userId: String,
+  productId: String,
+  quantity: Number
+}
+    </pre>
+
+    <h3>4. Order</h3>
+    <pre>
+{
+  id: String,
+  userId: String,
+  items: [
+    { productId: String, quantity: Number, price: Number }
+  ],
+  totalAmount: Number,
+  status: "pending" | "shipped" | "delivered",
+  createdAt: Date
+}
+    </pre>
+
+    <h3>5. Category (optional)</h3>
+    <pre>
+{
+  id: String,
+  name: String,
+  description: String
+}
+    </pre>
+  </div>
+
+  <div class="section">
+    <h2>🌐 API Endpoints Sample</h2>
+
+    <h3>🧍 USERS</h3>
+    <ul>
+      <li><code>POST /api/users/register</code> – Register new user</li>
+      <li><code>POST /api/users/login</code> – Login user</li>
+      <li><code>GET /api/users/me</code> – Get current user info</li>
+    </ul>
+
+    <h3>📦 PRODUCTS</h3>
+    <ul>
+      <li><code>GET /api/products</code> – Get all products</li>
+      <li><code>POST /api/products</code> – Add product (admin)</li>
+      <li><code>GET /api/products/:id</code> – Get single product</li>
+      <li><code>PUT /api/products/:id</code> – Update product</li>
+      <li><code>DELETE /api/products/:id</code> – Delete product</li>
+    </ul>
+
+    <h3>🛒 CART</h3>
+    <ul>
+      <li><code>GET /api/cart</code> – Get current user’s cart</li>
+      <li><code>POST /api/cart/add</code> – Add item to cart</li>
+      <li><code>POST /api/cart/remove</code> – Remove item from cart</li>
+      <li><code>POST /api/cart/clear</code> – Clear cart</li>
+    </ul>
+
+    <h3>📦 ORDERS</h3>
+    <ul>
+      <li><code>POST /api/orders</code> – Place order</li>
+      <li><code>GET /api/orders</code> – List user orders</li>
+      <li><code>GET /api/orders/:id</code> – Order details</li>
+    </ul>
+  </div>
+
+</body>
+</html>
