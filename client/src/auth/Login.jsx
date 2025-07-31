@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './login.css';
 
 function Login() {
   const [error, setError] = useState(null);
@@ -32,11 +33,8 @@ function Login() {
       });
 
       if (response.data.success) {
-        // Store user data and token in localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        
-        // Redirect to home page
         navigate('/home');
       } else {
         setError(response.data.message || 'Login failed');
@@ -57,37 +55,66 @@ function Login() {
 
   return (
     <div className="login-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        {error && <div className="error-message">{error}</div>}
+      <div className="login-card">
+        <figure className="logo-figure">
+          <img src="/logo.jpg" alt="Company Logo" className="logo-img" />
+          <figcaption className="logo-caption">Welcome Back</figcaption>
+        </figure>
         
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            ref={emailRef}
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            ref={passwordRef}
-            placeholder="Enter password"
-            required
-            minLength="6"
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Logging in...' : 'Login'}
-          </button>
-        </div>
-      </form>
+        <form onSubmit={handleSubmit} className="login-form">
+          {error && <div className="error-message">{error}</div>}
+          
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              ref={emailRef}
+              placeholder="Enter your email"
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              ref={passwordRef}
+              placeholder="Enter password"
+              className="form-input"
+              required
+              minLength="6"
+            />
+          </div>
+          <div className="form-options">
+            <div className="remember-me">
+              <input type="checkbox" id="remember" />
+              <label htmlFor="remember">Remember me</label>
+            </div>
+            <div className="forgot-password" onClick={() => navigate('/forgot-password')}>
+              Forgot password?
+            </div>
+          </div>
+          <div className="form-group">
+            <button 
+              type="submit" 
+              className="submit-btn"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <span className="spinner"></span>
+                  Logging in...
+                </>
+              ) : 'Login'}
+            </button>
+          </div>
+          <div className="register-redirect">
+            Don't have an account? <span onClick={() => navigate('/register')}>Register</span>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

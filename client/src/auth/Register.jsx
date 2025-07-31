@@ -43,7 +43,6 @@ function Register() {
       console.log('Registration response:', response);
       
       if (response.data.success) {
-        // Store token and user data in localStorage
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify({
           id: response.data.user.id,
@@ -52,12 +51,9 @@ function Register() {
         }));
         
         setSuccess(response.data.message);
-        // Clear form
         usernameRef.current.value = '';
         useremailRef.current.value = '';
         userpasswordRef.current.value = '';
-        
-        // Navigate to login after successful registration
         navigate('/login');
       } else {
         setError(response.data.message || 'Registration failed');
@@ -78,48 +74,69 @@ function Register() {
 
   return (
     <div className="register-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
-        {error && <div className="error-message">{error}</div>}
-        {success && <div className="success-message">{success}</div>}
+      <div className="register-card">
+        <figure className="logo-figure">
+          <img src="/logo.jpg" alt="Company Logo" className="logo-img" />
+          <figcaption className="logo-caption">Create Your Account</figcaption>
+        </figure>
         
-        <div className="form-group">
-          <label htmlFor="username">Full Name</label>
-          <input
-            type="text"
-            id="username"
-            ref={usernameRef}
-            placeholder="Enter full name"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            ref={useremailRef}
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            ref={userpasswordRef}
-            placeholder="Enter password"
-            required
-            minLength="6"
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Registering...' : 'Register'}
-          </button>
-        </div>
-      </form>
+        <form onSubmit={handleSubmit} className="register-form">
+          {error && <div className="error-message">{error}</div>}
+          {success && <div className="success-message">{success}</div>}
+          
+          <div className="form-group">
+            <label htmlFor="username" className="form-label">Full Name</label>
+            <input
+              type="text"
+              id="username"
+              ref={usernameRef}
+              placeholder="Enter full name"
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              ref={useremailRef}
+              placeholder="Enter your email"
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              ref={userpasswordRef}
+              placeholder="Enter password"
+              className="form-input"
+              required
+              minLength="6"
+            />
+          </div>
+          <div className="form-group">
+            <button 
+              type="submit" 
+              className="submit-btn"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <span className="spinner"></span>
+                  Registering...
+                </>
+              ) : 'Register'}
+            </button>
+          </div>
+          <div className="login-redirect">
+            Already have an account? <span onClick={() => navigate('/login')}>Login</span>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-.register-container {
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.register-card {
+.login-card {
   background: white;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -18,7 +18,7 @@
   transition: transform 0.3s ease;
 }
 
-.register-card:hover {
+.login-card:hover {
   transform: translateY(-5px);
 }
 
@@ -45,7 +45,7 @@
   color: #2c3e50;
 }
 
-.register-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -75,6 +75,31 @@
   outline: none;
   border-color: #3498db;
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+}
+
+.forgot-password {
+  color: #3498db;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+  color: #2980b9;
 }
 
 .submit-btn {
@@ -124,36 +149,27 @@
   text-align: center;
 }
 
-.success-message {
-  color: #27ae60;
-  background-color: #e8f5e9;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  text-align: center;
-}
-
-.login-redirect {
+.register-redirect {
   text-align: center;
   font-size: 14px;
   color: #7f8c8d;
   margin-top: 10px;
 }
 
-.login-redirect span {
+.register-redirect span {
   color: #3498db;
   font-weight: 500;
   cursor: pointer;
   text-decoration: underline;
 }
 
-.login-redirect span:hover {
+.register-redirect span:hover {
   color: #2980b9;
 }
 
 /* Responsive adjustments */
 @media (max-width: 480px) {
-  .register-card {
+  .login-card {
     padding: 30px 20px;
   }
   
@@ -164,5 +180,15 @@
   
   .logo-caption {
     font-size: 20px;
+  }
+  
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .forgot-password {
+    align-self: flex-end;
   }
 }
