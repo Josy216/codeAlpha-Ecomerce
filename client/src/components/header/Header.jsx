@@ -63,9 +63,9 @@ function Header() {
               <nav className="nav-links">
                 <ul>
                   <li><Link to="/products" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
-                  <li><Link to="/products" onClick={() => setIsMenuOpen(false)}>Products</Link></li>
+                  <li><Link to="/service" onClick={() => setIsMenuOpen(false)}>service</Link></li>
                   <li><Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link></li>
-                  <li><Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
+                  <li><Link to="/order" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
                 </ul>
               </nav>
               
@@ -97,9 +97,9 @@ function Header() {
             <nav className="nav-links">
               <ul>
                 <li><Link to="/products">Home</Link></li>
-                <li><Link to="/products">Products</Link></li>
+                <li><Link to="/service">Service</Link></li>
                 <li><Link to="/about">About</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
+                <li><Link to="/order">Order</Link></li>
               </ul>
             </nav>
             

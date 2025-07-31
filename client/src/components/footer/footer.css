@@ -1,0 +1,116 @@
+/* Footer Container */
+.footer-container {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 60px 20px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+/* Footer Columns */
+.footer-column {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 30px;
+}
+
+/* Brand Column */
+.brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ecf0f1;
+  margin-bottom: 20px;
+}
+
+.footer-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.brand-slogan {
+  font-style: italic;
+  margin-bottom: 20px;
+  color: #bdc3c7;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #95a5a6;
+}
+
+/* Common Footer Styles */
+.footer-heading {
+  font-size: 20px;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+  color: #3498db;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #3498db;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 15px;
+}
+
+.footer-link:hover {
+  color: #3498db;
+}
+
+.footer-link i {
+  width: 20px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .footer-column {
+    min-width: 100%;
+  }
+  
+  .footer-heading {
+    margin-bottom: 15px;
+  }
+}
