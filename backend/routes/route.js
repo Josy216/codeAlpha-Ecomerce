@@ -1,32 +1,14 @@
 import express from 'express';
-const route = express.Router();
-import db from '../config/db.js'; 
-import bcrypt from 'bcrypt';
+const router = express.Router();
 import { install } from '../controllers/install.js';
+import { register } from '../controllers/register.js';
+import { login } from '../controllers/login.js';
 
-route.get('/install', install);
+router.get('/install', install);
 
-route.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
+router.post('/register', register );
 
-  try {
-    const salt = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(password, salt);
+router.post('/login', login);
 
-    const usersData = `INSERT INTO users(name, email, password) VALUES (?, ?, ?)`;
 
-    db.query(usersData, [name, email, hashPassword], (err, result) => {
-      if (err) {
-        console.error('Error registering user:', err);
-        return res.status(500).json({ message: 'Registration failed' });
-      }
-
-      res.status(201).json({ message: 'User registered successfully' });
-    });
-  } catch (error) {
-    console.error('Hashing error:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-export { route };
+export { router };

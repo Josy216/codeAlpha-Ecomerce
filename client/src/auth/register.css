@@ -1,0 +1,10 @@
+form{
+    padding: 12px;
+    margin: 12px;
+    width: 350px;
+    box-shadow: 3px 5px 8px black;
+}
+form input{
+    margin: 5px;
+    padding: 4px;
+}
