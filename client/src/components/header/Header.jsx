@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
 import './header.css';
 
-function Header() {
+function Header({ cartItems }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,54 +38,66 @@ function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const getTotalItems = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
   return (
-    <header className="header">
-      <div className="header-content">
-        <div className="logo-container">
-          <Link to={user ? '/home' : '/'} className="logo-link">
-            <img src="/logo.jpg" alt="Company Logo" className="logo-img" />
-            <span className="logo-text">Jocode</span>
+    <header className="header-renamed">
+      <div className="header-renamed__content">
+        <div className="header-renamed__logo-container">
+          <Link to={user ? '/' : '/'} className="header-renamed__logo-link">
+            <img src="/logo.jpg" alt="Company Logo" className="header-renamed__logo-img" />
+            <span className="header-renamed__logo-text">Jocode</span>
           </Link>
         </div>
 
         {isMobile ? (
           <>
-            <button 
-              className={`hamburger ${isMenuOpen ? 'open' : ''}`} 
-              onClick={toggleMenu}
-              aria-label="Menu"
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+            <div className="header-renamed__mobile-right">
+              <Link to="/cart" className="header-renamed__cart-icon-mobile">
+                <FaShoppingCart />
+                {getTotalItems() > 0 && (
+                  <span className="header-renamed__cart-count">{getTotalItems()}</span>
+                )}
+              </Link>
+              <button 
+                className={`header-renamed__hamburger ${isMenuOpen ? 'open' : ''}`} 
+                onClick={toggleMenu}
+                aria-label="Menu"
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
             
-            <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-              <nav className="nav-links">
+            <div className={`header-renamed__mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+              <nav className="header-renamed__nav-links">
                 <ul>
-                  <li><Link to="/products" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
-                  <li><Link to="/service" onClick={() => setIsMenuOpen(false)}>service</Link></li>
+                  <li><Link to="/products" onClick={() => setIsMenuOpen(false)}>Products</Link></li>
+                  <li><Link to="/order" onClick={() => setIsMenuOpen(false)}>Order</Link></li>
+                  <li><Link to="/howitwork" onClick={() => setIsMenuOpen(false)}>How It Works</Link></li>
                   <li><Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link></li>
-                  <li><Link to="/order" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
                 </ul>
               </nav>
               
-              <div className="user-actions">
+              <div className="header-renamed__user-actions">
                 {user ? (
-                  <div className="user-info">
-                    <span className="welcome-message">
-                      Welcome, <span className="user-name">{user.name.split(' ')[0]}</span>
+                  <div className="header-renamed__user-info">
+                    <span className="header-renamed__welcome-message">
+                      Welcome, <span className="header-renamed__user-name">{user.name.split(' ')[0]}</span>
                     </span>
-                    <button onClick={handleLogout} className="logout-btn">
+                    <button onClick={handleLogout} className="header-renamed__logout-btn">
                       Logout
                     </button>
                   </div>
                 ) : (
-                  <div className="auth-links">
-                    <Link to="/login" className="login-link" onClick={() => setIsMenuOpen(false)}>
+                  <div className="header-renamed__auth-links">
+                    <Link to="/login" className="header-renamed__login-link" onClick={() => setIsMenuOpen(false)}>
                       Sign In
                     </Link>
-                    <Link to="/register" className="register-link" onClick={() => setIsMenuOpen(false)}>
+                    <Link to="/register" className="header-renamed__register-link" onClick={() => setIsMenuOpen(false)}>
                       Register
                     </Link>
                   </div>
@@ -94,31 +107,37 @@ function Header() {
           </>
         ) : (
           <>
-            <nav className="nav-links">
+            <nav className="header-renamed__nav-links">
               <ul>
-                <li><Link to="/products">Home</Link></li>
-                <li><Link to="/service">Service</Link></li>
-                <li><Link to="/about">About</Link></li>
+                <li><Link to="/products">Products</Link></li>
                 <li><Link to="/order">Order</Link></li>
+                <li><Link to="/howitwork">How It Works</Link></li>
+                <li><Link to="/about">About</Link></li>
               </ul>
             </nav>
             
-            <div className="user-actions">
+            <div className="header-renamed__user-actions">
+              <Link to="/cart" className="header-renamed__cart-icon">
+                <FaShoppingCart />
+                {getTotalItems() > 0 && (
+                  <span className="header-renamed__cart-count">{getTotalItems()}</span>
+                )}
+              </Link>
               {user ? (
-                <div className="user-info">
-                  <span className="welcome-message">
-                    Welcome, <span className="user-name">{user.name.split(' ')[0]}</span>
+                <div className="header-renamed__user-info">
+                  <span className="header-renamed__welcome-message">
+                    Welcome, <span className="header-renamed__user-name">{user.name.split(' ')[0]}</span>
                   </span>
-                  <button onClick={handleLogout} className="logout-btn">
+                  <button onClick={handleLogout} className="header-renamed__logout-btn">
                     Logout
                   </button>
                 </div>
               ) : (
-                <div className="auth-links">
-                  <Link to="/login" className="login-link">
+                <div className="header-renamed__auth-links">
+                  <Link to="/login" className="header-renamed__login-link">
                     Sign In
                   </Link>
-                  <Link to="/register" className="register-link">
+                  <Link to="/register" className="header-renamed__register-link">
                     Register
                   </Link>
                 </div>

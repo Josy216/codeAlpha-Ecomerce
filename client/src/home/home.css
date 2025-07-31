@@ -7,7 +7,7 @@
 
 /* Hero Section */
 .hero-section {
-  height: 80vh;
+  height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -145,6 +145,82 @@
 /* Font Awesome Icons */
 .fab, .fas {
   font-size: 1.2rem;
+}
+/* Categories Section */
+.categories-section {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+}
+
+.categories-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: #2c3e50;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.category-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+}
+
+.category-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.category-content {
+  padding: 25px;
+}
+
+.category-content h3 {
+  color: #3498db;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.category-content p {
+  margin-bottom: 20px;
+}
+
+.explore-link {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.explore-link:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .categories-section h2 {
+    font-size: 2rem;
+  }
 }
 
 /* Responsive Design */
