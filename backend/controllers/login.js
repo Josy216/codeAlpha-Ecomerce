@@ -26,17 +26,9 @@ const login = async (req, res) => {
 
     const user = results[0];
     const isMatch = await bcrypt.compare(password, user.password);
-console.log(`Comparing:`, {
-  inputPassword: password,
-  storedHash: user.password,
-  matchResult: isMatch
-});
-
-console.log(`password here: ${user.password}`);
 
     
     if (!isMatch) {
-      console.log(`password did not match `);
       return res.status(401).json({
         success: false,
         message: '❌ Invalid credentials'
@@ -49,7 +41,6 @@ console.log(`password here: ${user.password}`);
       { expiresIn: '1d' }
     );
 
-    console.log(`✅ Logged in: ${email}`);
     res.status(200).json({
       success: true,
       message: `✅ Welcome back ${user.name}`,
