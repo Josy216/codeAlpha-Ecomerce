@@ -53,6 +53,7 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 .step-card:hover {
@@ -88,6 +89,48 @@
   margin: 0;
 }
 
+/* Links within steps */
+.step-content a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.step-content a:hover {
+  color: #2980b9;
+}
+
+.step-content a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #3498db;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.step-content a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Admin Note Card */
+.step-card.admin-note {
+  border-left: 4px solid #9b59b6;
+}
+
+.step-card.admin-note .step-number {
+  background: linear-gradient(135deg, #9b59b6, #e74c3c);
+}
+
+.step-card.admin-note .step-content h3 {
+  color: #9b59b6;
+}
+
 /* CTA Section */
 .cta-section {
   text-align: center;
@@ -101,6 +144,7 @@
 }
 
 .cta-button {
+  display: inline-block;
   background-color: #3498db;
   color: white;
   border: none;
@@ -109,6 +153,8 @@
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .cta-button:hover {
@@ -144,4 +190,33 @@
     padding: 1.5rem;
     text-align: center;
   }
+
+  .step-content a::after {
+    display: none;
+  }
 }
+
+/* Animation for step cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-card {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.step-card:nth-child(1) { animation-delay: 0.1s; }
+.step-card:nth-child(2) { animation-delay: 0.2s; }
+.step-card:nth-child(3) { animation-delay: 0.3s; }
+.step-card:nth-child(4) { animation-delay: 0.4s; }
+.step-card:nth-child(5) { animation-delay: 0.5s; }
+.step-card:nth-child(6) { animation-delay: 0.6s; }
+.step-card.admin-note { animation-delay: 0.7s; }

@@ -1,55 +1,73 @@
 import React from 'react';
 import './footer.css';
+import { FaYoutube, FaTelegram, FaEnvelope, FaPhone, FaInfoCircle, FaCog, FaBox, FaQuestionCircle, FaHome, FaShoppingCart, FaUserPlus, FaSignInAlt, FaKey } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
     <footer className="footer-container">
       <div className="footer-content">
-        {/* Brand Column */}
         <div className="footer-column brand-column">
-          <a href="#" className="brand-link">
+          <Link to="#" className="brand-link">
             <img src="/logo.jpg" alt="Jocode Logo" className="footer-logo" />
             <div className="brand-name">Jocode</div>
-          </a>
-          <p className="brand-slogan">Everything is for sale</p>
-          <p className="copyright">© {new Date().getFullYear()} Jocode. All rights reserved.</p>
+          </Link>
+          <p className="brand-slogan">Nothing is for sale but to serve</p>
+          <p className="copyright">
+            © {new Date().getFullYear()} Jocode. All rights reserved.
+          </p>
         </div>
 
         {/* Contact Column */}
         <div className="footer-column contact-column">
           <h3 className="footer-heading">Contact Us</h3>
           <div className="footer-links">
-            <a href="https://youtube.com/jocode" target="_blank" rel="noopener noreferrer" className="footer-link">
-              <i className="fab fa-youtube"></i> YouTube
+            <a
+              href="https://youtube.com/@jocode216"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+            >
+              <FaYoutube /> YouTube
             </a>
-            <a href="https://t.me/jocode" target="_blank" rel="noopener noreferrer" className="footer-link">
-              <i className="fab fa-telegram"></i> Telegram
+            <a
+              href="https://t.me/jocode216"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+            >
+              <FaTelegram /> Telegram
             </a>
-            <a href="mailto:contact@jocode.com" className="footer-link">
-              <i className="fas fa-envelope"></i> Email
+            <a href="mailto:josyabteka@gmail.com" className="footer-link">
+              <FaEnvelope /> Email
             </a>
-            <a href="tel:+1234567890" className="footer-link">
-              <i className="fas fa-phone"></i> +1 (234) 567-890
+            <a href="tel:+251962561350" className="footer-link">
+              <FaPhone /> +251 962 561 350
             </a>
           </div>
         </div>
-
         {/* Links Column */}
         <div className="footer-column links-column">
           <h3 className="footer-heading">Useful Links</h3>
           <div className="footer-links">
-            <a href="/about" className="footer-link">
-              <i className="fas fa-info-circle"></i> About Us
-            </a>
-            <a href="/services" className="footer-link">
-              <i className="fas fa-cog"></i> Services
-            </a>
-            <a href="/products" className="footer-link">
-              <i className="fas fa-box"></i> Products
-            </a>
-            <a href="/how-it-works" className="footer-link">
-              <i className="fas fa-question-circle"></i> How It Works
-            </a>
+            <Link to="/" className="footer-link">
+              <FaHome /> Home
+            </Link>
+            <Link to="/products" className="footer-link">
+              <FaBox /> Products
+            </Link>
+            <Link to="/howitwork" className="footer-link">
+              <FaQuestionCircle /> How It Works
+            </Link>
+            <Link to="/register" className="footer-link">
+              <FaUserPlus /> Register
+            </Link>
+            <Link to="/courseAdmin" className="footer-link">
+              <FaInfoCircle /> Admin
+            </Link>
+            <Link to="/userslist" className="footer-link">
+              <FaInfoCircle /> users
+            </Link>
           </div>
         </div>
       </div>

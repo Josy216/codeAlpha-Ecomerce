@@ -1,14 +1,69 @@
-import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import './order.css';
 
 function Order() {
   const location = useLocation();
-  const cartItems = location.state?.cartItems || [];
+  const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState([]);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+
+  // Load cart items from localStorage when component mounts
+  useEffect(() => {
+    const savedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const items = location.state?.cartItems || savedCartItems;
+    setCartItems(items);
+    saveCartToStorage(items);
+  }, [location.state]);
+
+  const saveCartToStorage = (items) => {
+    localStorage.setItem('cartItems', JSON.stringify(items));
+  };
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
+
+  const handlePlaceOrder = () => {
+    // In a real app, you would send this to your backend
+    const orderData = {
+      items: cartItems,
+      total: calculateTotal(),
+      date: new Date().toISOString(),
+      status: 'pending'
+    };
+
+    // Save order to localStorage (simulating database)
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orders.push(orderData);
+    localStorage.setItem('orders', JSON.stringify(orders));
+
+    // Clear cart and show confirmation
+    localStorage.removeItem('cartItems');
+    setCartItems([]);
+    setOrderPlaced(true);
+    navigate('/')
+  };
+
+  if (orderPlaced) {
+    return (
+      <div className="order-renamed__container">
+        <h1 className="order-renamed__title">Order Confirmation</h1>
+        <div className="order-renamed__success">
+          <p>Your order has been placed successfully!</p>
+          <p>Thank you for shopping with us.</p>
+          <div className="order-renamed__action-buttons">
+            <Link to="/products" className="order-renamed__shop-btn">
+              Continue Shopping
+            </Link>
+            <Link to="/orders" className="order-renamed__orders-btn">
+              View Your Orders
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="order-renamed__container">
@@ -23,16 +78,21 @@ function Order() {
         <>
           <div className="order-renamed__items-list">
             {cartItems.map(item => (
-              <div key={item.id} className="order-renamed__item-card">
+              <div key={`${item.id}-${item.size || 'none'}`} className="order-renamed__item-card">
                 <div className="order-renamed__item-image-wrapper">
                   <img 
                     src={item.thumbnail} 
                     alt={item.title} 
                     className="order-renamed__item-img"
+                    onError={(e) => {
+                      e.target.src = '/placeholder-product.png'; // Fallback image
+                    }}
                   />
                 </div>
                 <div className="order-renamed__item-content">
                   <h2 className="order-renamed__item-title">{item.title}</h2>
+                  {item.size && <div className="order-renamed__item-size">Size: {item.size}</div>}
+                  {item.color && <div className="order-renamed__item-color">Color: {item.color}</div>}
                   <div className="order-renamed__item-price">${item.price.toFixed(2)}</div>
                   <div className="order-renamed__item-qty">Quantity: {item.quantity}</div>
                   <div className="order-renamed__item-subtotal">
@@ -60,7 +120,13 @@ function Order() {
           </div>
 
           <div className="order-renamed__action-buttons">
-            <button className="order-renamed__checkout-btn">Place Order</button>
+            <button 
+              className="order-renamed__checkout-btn"
+              onClick={handlePlaceOrder}
+            >
+              Place Order
+            </button>
+      
           </div>
         </>
       )}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import './Product.css';
-
+import { ScaleLoader } from "react-spinners";
 function Product({ addToCart }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -88,15 +88,15 @@ function Product({ addToCart }) {
   if (loading) {
     return (
       <div className="product-container">
-        <h1>Electronics Products</h1>
-        <div className="loading">Loading products...</div>
+        <h1>Jocode Products</h1>
+        <div className="loading"><ScaleLoader /></div>
       </div>
     );
   }
 
   return (
     <div className="product-container">
-      <h1>Electronics Products</h1>
+      <h1>Jocode Products</h1>
       
       <div className="product-grid">
         {products.map((product) => (

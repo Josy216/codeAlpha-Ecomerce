@@ -1,144 +1,158 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './home.css';
+import { Link } from 'react-router-dom';
 
 function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
   
-  const categories = [
+  const carouselImages = [
     {
       id: 1,
-      title: "Web Development",
-      description: "Master HTML, CSS, JavaScript, React, and backend technologies with our comprehensive courses.",
-      image: "https://images.unsplash.com/photo-1623479322729-28b25c16b011?ixlib=rb-4.1.0&auto=format&fit=crop&w=1080&q=80",
-      link: "/products?category=web-development"
+      image: "/jocode.jpg"
     },
     {
       id: 2,
-      title: "App Development",
-      description: "Build mobile apps with React Native, Flutter, and Swift. From beginner to advanced levels.",
-      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.1.0&auto=format&fit=crop&w=1080&q=80",
-      link: "/products?category=app-development"
+      image: "/1.jpg",
     },
     {
       id: 3,
-      title: "Machine Learning",
-      description: "Learn AI fundamentals, neural networks, and data science with Python and TensorFlow.",
-      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.1.0&auto=format&fit=crop&w=1080&q=80",
-      link: "/products?category=machine-learning"
+      image: "/2.jpg",
     },
     {
       id: 4,
-      title: "Prompt Engineering",
-      description: "Master AI interaction techniques and optimize your prompts for ChatGPT and other LLMs.",
-      image: "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?ixlib=rb-4.1.0&auto=format&fit=crop&w=1080&q=80",
-      link: "/products?category=prompt-engineering"
+      image: "/store.jpg",
     },
     {
       id: 5,
-      title: "DevOps & Cloud",
-      description: "Learn Docker, Kubernetes, AWS, and CI/CD pipelines to deploy applications at scale.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.1.0&auto=format&fit=crop&w=1080&q=80",
-      link: "/products?category=devops"
+      image: "/fast.jpg",
     },
     {
       id: 6,
-      title: "Free Dev Resources",
-      description: "Access our curated collection of free tools and resources for developers at all levels.",
-      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.1.0&auto=format&fit=crop&w=1080&q=80",
-      link: "https://jocode.devs.josephteka.com",
-      external: true
+      image: "/programming.jpg",
+    },
+    {
+      id: 7,
+      image: "/1.jpg",
     }
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 60000); // Change slide every minute
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
   return (
     <div className="home-container">
-      
-    <div className="home-container">
-      {/* Hero Section */}
-      <section className="hero-section" style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1562813733-b31f71025d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2OTg1NjB8MHwxfHNlYXJjaHwxMHx8Y29kaW5nfGVufDB8fHx8MTc1Mzk2MDgwOHww&ixlib=rb-4.1.0&q=80&w=1080')`
-      }}>
-        <div className="hero-content">
-          <h1>Welcome to Jocode Product Center</h1>
-          <p className="slogan">Nothing is for sale — only what empowers your growth and scales your learning is worth offering.</p>
-
-          <button className="cta-button">Explore Our Products</button>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="services-section">
-        <h2>What We Provide</h2>
-        <div className="services-grid">
-          <div className="service-card">
-            <h3>Web Development Made Easy</h3>
-            <p>Professional web development services tailored to your needs. From simple websites to complex web applications.</p>
-          </div>
-          <div className="service-card">
-            <h3>Free Web Resources</h3>
-            <p>Check out our <a href="https://jocode-devtools.netlify.app/" target="_blank" rel="noopener noreferrer">Jocode Dev Tools</a> - A powerful all-in-one platform that curates 500+ essential developer tools.</p>
-            <p>Built to help beginners avoid confusion and professionals save time, Jocode Dev Tools simplifies your dev journey with speed, clarity, and zero guesswork.</p>
-          </div>
-          <div className="service-card">
-            <h3>Custom Solutions</h3>
-            <p>We create custom software solutions that fit your business requirements perfectly.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="categories-section">
-        <h2>Explore Our Categories</h2>
-        <div className="categories-grid">
-          {categories.map(category => (
-            <div className="category-card" key={category.id}>
-              <div 
-                className="category-image" 
-                style={{ backgroundImage: `url(${category.image})` }}
-              ></div>
-              <div className="category-content">
-                <h3>{category.title}</h3>
-                <p>{category.description}</p>
-                {category.external ? (
-                  <a 
-                    href={category.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="explore-link"
-                  >
-                    Explore Resources
-                  </a>
-                ) : (
-                  <a href={category.link} className="explore-link">
-                    Explore Courses
-                  </a>
-                )}
-              </div>
+      {/* Carousel Section */}
+      <section className="carousel-section">
+        <div className="carousel-container">
+          {carouselImages.map((item, index) => (
+            <div 
+              key={item.id}
+              className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
+              style={{ backgroundImage: `url(${item.image})` }}
+            >
+            
             </div>
           ))}
-        </div>
-      </section>
-
-    </div>
-
-      {/* Services Section */}
-      <section className="services-section">
-        <h2>What We Provide</h2>
-        <div className="services-grid">
-          <div className="service-card">
-            <h3>Web Development Made Easy</h3>
-            <p>Professional web development services tailored to your needs. From simple websites to complex web applications.</p>
-          </div>
-          <div className="service-card">
-            <h3>Free Web Resources</h3>
-            <p>Check out our <a href="https://jocode.devs.josephteka.com" target="_blank" rel="noopener noreferrer">Jocode Dev Tool</a> - A powerful all-in-one platform that curates 500+ essential developer tools.</p>
-            <p>Built to help beginners avoid confusion and professionals save time, Jocode Dev Tool simplifies your dev journey with speed, clarity, and zero guesswork.</p>
-          </div>
-          <div className="service-card">
-            <h3>Custom Solutions</h3>
-            <p>We create custom software solutions that fit your business requirements perfectly.</p>
+          <button className="carousel-control prev" onClick={prevSlide}>&#10094;</button>
+          <button className="carousel-control next" onClick={nextSlide}>&#10095;</button>
+          <div className="carousel-dots">
+            {carouselImages.map((_, index) => (
+              <span 
+                key={index}
+                className={`dot ${index === currentSlide ? 'active' : ''}`}
+                onClick={() => setCurrentSlide(index)}
+              ></span>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* Welcome Section - 100vh */}
+      <section className="welcome-section">
+        <div className="welcome-content">
+          <h2>Welcome to <span className="jocode-highlight">Jocode</span> Store</h2>
+          <p className="slogan">
+  Empowering your tech journey — whether you're writing your first line of code, launching a passion project, or searching for the right tools to build your future.  
+  <strong>Jocode is where learning meets doing.</strong>
+
+
+          </p>
+          <div className="scrolling-indicator">
+            <span>Scroll to explore</span>
+            <div className="arrow-down"></div>
+          </div>
+        </div>
+        <div className="welcome-gradient"></div>
+      </section>
+
+      {/* Mission Section - 40vh */}
+      <section className="mission-section">
+        <div className="mission-container">
+          <h3>Our Mission</h3>
+          <div className="mission-card">
+            <div className="mission-icon">✨</div>
+            <p>
+              "To simplify tech learning and access to tools for everyone." 
+              Whether you're learning to code, building your first project, 
+              or looking for developer gear, Jocode is your one-stop store.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Offerings Section - 65vh */}
+      <section className="offerings-section">
+        <div className="offerings-container">
+          <h3>What We Offer</h3>
+          <div className="offerings-grid">
+            <div className="offering-card">
+              <div className="offering-icon">🎓</div>
+              <h4>Tech Courses</h4>
+              <p>Premium & Free courses in Web Dev and  App Development</p>
+              <Link to="/course" 
+              style={{color:'blue', textDecoration:'none'}}
+            >Course</Link>
+            </div>
+            <div className="offering-card">
+              <div className="offering-icon">📚</div>
+              <h4>Learning Tools</h4>
+              <p>EBooks, cheat sheets, roadmaps, and templates</p>
+              <a href="https://t.me/jocode216" 
+              style={{color:'blue', textDecoration:'none'}}
+              target='_blank'>Jocode</a>
+            </div>
+            <div className="offering-card">
+              <div className="offering-icon">💻</div>
+              <h4>Tech Products</h4>
+              <p>Curated electronics, developer gear and accessories</p>
+              <Link to="/products" 
+              style={{color:'blue', textDecoration:'none'}}
+              >products</Link>
+            </div>
+            <div className="offering-card">
+              <div className="offering-icon">🧰</div>
+              <h4>Dev Resources</h4>
+              <p>500+ curated code snippets and boilerplates</p>
+              <a href="https://jocode.devs.josephteka.com" 
+              style={{color:'blue', textDecoration:'none'}}
+              target='_blank'>Jocode dev tool</a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

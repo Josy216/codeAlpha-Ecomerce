@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './register.css';
+import { ScaleLoader } from "react-spinners";
 
 function Register() {
   const [error, setError] = useState(null);
@@ -127,7 +128,7 @@ function Register() {
               {isLoading ? (
                 <>
                   <span className="spinner"></span>
-                  Registering...
+                  <ScaleLoader />
                 </>
               ) : 'Register'}
             </button>

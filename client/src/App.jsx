@@ -11,7 +11,12 @@ import About from './components/about/About';
 import HowItWorks from './components/howitwork/Howitwork';
 import ResetPassword from './auth/ResetPassword';
 import Product from './product/Product';
-import Cart from './cart/Cart'; // Make sure to import the Cart component
+import Cart from './cart/Cart'; 
+import Course from './course/Course';
+import ProductForm from './components/products/ProductForm';
+import SingleCourse from './course/SingleCourse ';
+import UserCourses from './course/UserCourses';
+import GetUsers from './auth/GetUsers';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -55,14 +60,24 @@ function App() {
         <Route path="/forgotpassword" element={<ResetPassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/howitwork" element={<HowItWorks />} />
+            <Route path="/course" element={<UserCourses />} />
         <Route element={<Protected />}>
           <Route path="/order" element={<Order />} />
+        </Route>
+
+       <Route element={<Protected />}>
+        <Route path="/courseAdmin" element={<Course />} />
+        <Route path="/userslist" element={<GetUsers />} />
+            <Route path="/add-products" element={<ProductForm />} />
+            <Route path="/course/:id" element={<SingleCourse />} />
+            <Route path="/edit-products/:id" element={<ProductForm />} />
         </Route>
         
         <Route 
           path="/products" 
           element={<Product addToCart={addToCart} />} 
         />
+        <Route element={<Protected />}>
         <Route 
           path="/cart" 
           element={
@@ -70,9 +85,10 @@ function App() {
               cartItems={cartItems} 
               removeFromCart={removeFromCart}
               updateQuantity={updateQuantity}
+              />
+            } 
             />
-          } 
-        />
+            </Route>
       </Routes>
       <Footer />
     </>

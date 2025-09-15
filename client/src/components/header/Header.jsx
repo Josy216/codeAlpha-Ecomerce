@@ -48,7 +48,7 @@ function Header({ cartItems }) {
         <div className="header-renamed__logo-container">
           <Link to={user ? '/' : '/'} className="header-renamed__logo-link">
             <img src="/logo.jpg" alt="Company Logo" className="header-renamed__logo-img" />
-            <span className="header-renamed__logo-text">Jocode</span>
+            <span className="header-renamed__logo-text">JocodeStore</span>
           </Link>
         </div>
 
@@ -77,6 +77,7 @@ function Header({ cartItems }) {
                 <ul>
                   <li><Link to="/products" onClick={() => setIsMenuOpen(false)}>Products</Link></li>
                   <li><Link to="/order" onClick={() => setIsMenuOpen(false)}>Order</Link></li>
+                  <li><Link to="/course" onClick={() => setIsMenuOpen(false)}>Course</Link></li>
                   <li><Link to="/howitwork" onClick={() => setIsMenuOpen(false)}>How It Works</Link></li>
                   <li><Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link></li>
                 </ul>
@@ -97,9 +98,6 @@ function Header({ cartItems }) {
                     <Link to="/login" className="header-renamed__login-link" onClick={() => setIsMenuOpen(false)}>
                       Sign In
                     </Link>
-                    <Link to="/register" className="header-renamed__register-link" onClick={() => setIsMenuOpen(false)}>
-                      Register
-                    </Link>
                   </div>
                 )}
               </div>
@@ -111,6 +109,7 @@ function Header({ cartItems }) {
               <ul>
                 <li><Link to="/products">Products</Link></li>
                 <li><Link to="/order">Order</Link></li>
+                <li><Link to="/course">Course</Link></li>
                 <li><Link to="/howitwork">How It Works</Link></li>
                 <li><Link to="/about">About</Link></li>
               </ul>
@@ -136,9 +135,6 @@ function Header({ cartItems }) {
                 <div className="header-renamed__auth-links">
                   <Link to="/login" className="header-renamed__login-link">
                     Sign In
-                  </Link>
-                  <Link to="/register" className="header-renamed__register-link">
-                    Register
                   </Link>
                 </div>
               )}

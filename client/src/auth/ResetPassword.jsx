@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login.css'; // reuse same CSS
 
+import { ScaleLoader } from "react-spinners";
 function ResetPassword() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -97,7 +98,7 @@ function ResetPassword() {
               {isLoading ? (
                 <>
                   <span className="spinner"></span>
-                  Resetting...
+                 <ScaleLoader />
                 </>
               ) : 'Confirm & Reset'}
             </button>
